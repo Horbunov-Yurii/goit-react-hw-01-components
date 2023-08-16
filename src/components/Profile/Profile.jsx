@@ -1,33 +1,66 @@
+import propTypes from 'prop-types';
 import user from '../../data/user.json';
+import {
+  Container,
+  CardProfile,
+  CardContainer,
+  Avatar,
+  Stats,
+  StatsList,
+  UserName,
+  Quantity,
+  UserLocation,
+  UserTag,
+  Label,
+} from './Profile.styled';
 
-
-
-const { username, tag,location,avatar,stats: { followers, views, likes },} = user;
+const {
+  username,
+  tag,
+  location,
+  avatar,
+  stats: { followers, views, likes },
+} = user;
 
 export const Profile = () => {
   return (
-    <div className="profile">
-      <div className="description">
-        <img src={avatar} alt={username} className="avatar" />
-        <p className="name">{username}</p>
-        <p className="tag">{tag}</p>
-        <p className="location">{location}</p>
-      </div>
+    <Container>
+      <CardProfile>
+        <CardContainer>
+          <Avatar src={avatar} alt={username} />
+          <UserName>{username}</UserName>
+          <UserTag>@{tag}</UserTag>
+          <UserLocation>{location}</UserLocation>
+        </CardContainer>
 
-      <ul className="stats">
-        <li>
-          <span className="label">Followers</span>
-          <span className="quantity">{followers}</span>
-        </li>
-        <li>
-          <span className="label">Views</span>
-          <span className="quantity">{views}</span>
-        </li>
-        <li>
-          <span className="label">Likes</span>
-          <span className="quantity">{likes}</span>
-        </li>
-      </ul>
-    </div>
+        <Stats>
+          <StatsList>
+            <Label>Followers</Label>
+            <Quantity>{followers}</Quantity>
+          </StatsList>
+          <StatsList>
+            <Label>Views</Label>
+            <Quantity>{views}</Quantity>
+          </StatsList>
+          <StatsList>
+            <Label>Likes</Label>
+            <Quantity>{likes}</Quantity>
+          </StatsList>
+        </Stats>
+      </CardProfile>
+    </Container>
   );
+};
+
+
+Profile.propTypes = {
+  username: propTypes.string.isRequired,
+  tag: propTypes.string.isRequired,
+  location: propTypes.string.isRequired,
+  avatar: propTypes.string.isRequired,
+  stats: propTypes.shape({
+    followers: propTypes.number.isRequired,
+    views: propTypes.number.isRequired,
+    likes: propTypes.number.isRequired,
+  }),
 };
