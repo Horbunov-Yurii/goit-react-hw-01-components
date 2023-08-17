@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import user from '../../data/user.json';
 import {
   Container,
   CardProfile,
@@ -14,15 +13,8 @@ import {
   Label,
 } from './Profile.styled';
 
-const {
-  username,
-  tag,
-  location,
-  avatar,
-  stats: { followers, views, likes },
-} = user;
 
-export const Profile = () => {
+export const Profile = ({username,tag, location,avatar,stats:{followers,views,likes}}) => {
   return (
     <Container>
       <CardProfile>
